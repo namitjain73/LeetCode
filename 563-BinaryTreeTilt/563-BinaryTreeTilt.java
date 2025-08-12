@@ -1,4 +1,4 @@
-// Last updated: 8/13/2025, 12:29:27 AM
+// Last updated: 8/13/2025, 12:47:53 AM
 /**
  * Definition for a binary tree node.
  * public class TreeNode {
@@ -15,23 +15,19 @@
  * }
  */
 class Solution {
-    int n ;
-    public int helper(TreeNode root , int[] arr){
-        if(root == null){
-            return 0;
-        }
+    int n = 0;
+    public int helper(TreeNode root){
+        if(root == null) return 0;
 
 
-        int left = helper(root.left,arr);
-        int right = helper(root.right,arr);
-        arr[0] += Math.abs(left - right);
+        int left = helper(root.left);
+        int right = helper(root.right);
+        n += Math.abs(left - right);
         return root.val + left + right;
     }
-
     public int findTilt(TreeNode root) {
         n = 0;
-        int[] arr = new int[1];
-        helper(root,arr);
-        return arr[0];  
+        helper(root);
+        return n;
     }
 }
