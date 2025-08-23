@@ -1,4 +1,4 @@
-// Last updated: 8/8/2025, 12:04:39 PM
+// Last updated: 8/23/2025, 3:25:17 PM
 /**
  * Definition for a binary tree node.
  * public class TreeNode {
@@ -15,31 +15,35 @@
  * }
  */
 class Solution {
-     public BstPair ValidBST(TreeNode root){
-        if(root == null) return new BstPair();
-        BstPair lbp = ValidBST(root.left);
-        BstPair rbp = ValidBST(root.right);
-        BstPair sbp = new BstPair();
-        sbp.min = Math.min(lbp.min , Math.min(rbp.min , root.val));
-        sbp.max = Math.max(lbp.max, Math.max(rbp.max , root.val));
-        sbp.sum = lbp.sum + rbp.sum + root.val;
-        sbp.isbst = lbp.isbst && rbp.isbst && root.val > lbp.max && root.val < rbp.min;
+    public int maxSumBST(TreeNode root) {
+        return valid(root).ans;
+    }
+
+
+    public Pair valid(TreeNode root){
+        if(root == null) return new Pair();
+
+
+        Pair lbp = valid(root.left);
+        Pair rbp = valid(root.right);
+        Pair sbp = new Pair();
+        sbp.min = Math.min(lbp.min , Math.min(rbp.min,root.val));
+        sbp.max = Math.max(lbp.max , Math.max(rbp.max,root.val));
+        sbp.isbst = lbp.isbst && rbp.isbst && lbp.max < root.val && rbp.min > root.val;
+        sbp.sum = rbp.sum + lbp.sum + root.val;
         if(sbp.isbst){
             sbp.ans = Math.max(lbp.ans , Math.max(rbp.ans , sbp.sum));
         }else{
-            sbp.ans = Math.max(lbp.ans,rbp.ans);
+            sbp.ans = Math.max(lbp.ans , rbp.ans);
         }
         return sbp;
     }
-    public int maxSumBST(TreeNode root) {
-        return ValidBST(root).ans;
-    }
-
-    class BstPair{
+    class Pair{
         boolean isbst = true;
-        long min = Integer.MAX_VALUE;
         long max = Integer.MIN_VALUE;
-        int ans = 0;
-        int sum = 0 ;
+        long min = Integer.MAX_VALUE;
+        int ans=  0;
+        int sum = 0;
+
     }
 }
