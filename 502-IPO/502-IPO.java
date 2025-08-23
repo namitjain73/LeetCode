@@ -1,4 +1,4 @@
-// Last updated: 8/23/2025, 10:46:12 PM
+// Last updated: 8/23/2025, 10:48:42 PM
 class Solution {
     public int findMaximizedCapital(int k, int w, int[] profit, int[] capital) {
         int[][] arr = new int[profit.length][2];
