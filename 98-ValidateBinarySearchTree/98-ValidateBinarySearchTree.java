@@ -1,4 +1,4 @@
-// Last updated: 8/8/2025, 11:18:38 AM
+// Last updated: 8/23/2025, 3:41:04 PM
 /**
  * Definition for a binary tree node.
  * public class TreeNode {
@@ -15,26 +15,26 @@
  * }
  */
 class Solution {
-
-    public BstPair ValidBST(TreeNode root){
-        if(root == null) return new BstPair();
-        BstPair lbp = ValidBST(root.left);
-        BstPair rbp = ValidBST(root.right);
-        BstPair sbp = new BstPair();
-        sbp.min = Math.min(lbp.min , Math.min(rbp.min , root.val));
-        sbp.max = Math.max(lbp.max, Math.max(rbp.max , root.val));
-        sbp.isbst = lbp.isbst && rbp.isbst && root.val > lbp.max && root.val < rbp.min;
-        return sbp;
-    }
     public boolean isValidBST(TreeNode root) {
-        return ValidBST(root).isbst;
+        // if(root.left == null && root.right == null) return true;
+        return valid(root).isbst;
     }
+    public Pair valid(TreeNode root){
+        if(root == null) return new Pair();
 
+        Pair lbp = valid(root.left);
+        Pair rbp = valid(root.right);
+        Pair sbp = new Pair();
+        sbp.min = Math.min(lbp.min , Math.min(rbp.min , root.val));
+        sbp.max = Math.max(lbp.max , Math.max(rbp.max , root.val));
+        sbp.isbst = lbp.isbst && rbp.isbst && lbp.max < root.val && rbp.min > root.val;
+        return sbp;
 
-
-    class BstPair{
+    }
+    class Pair{
         boolean isbst = true;
         long min = Long.MAX_VALUE;
         long max = Long.MIN_VALUE;
+
     }
 }
