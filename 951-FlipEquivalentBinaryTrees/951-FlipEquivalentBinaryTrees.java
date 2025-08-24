@@ -1,4 +1,4 @@
-// Last updated: 8/24/2025, 2:14:52 PM
+// Last updated: 8/24/2025, 2:33:08 PM
 /**
  * Definition for a binary tree node.
  * public class TreeNode {
@@ -20,8 +20,8 @@ class Solution {
         if(root1 == null || root2 == null) return false;
         if(root1.val != root2.val) return false;
 
-        boolean flip = flipEquiv(root1.left , root2.right) && flipEquiv(root1.right, root2.left);
-        boolean noflip = flipEquiv(root1.left, root2.left) && flipEquiv(root1.right, root2.right);
+        boolean flip = flipEquiv(root1.left , root2.right ) && flipEquiv(root1.right , root2.left );
+        boolean noflip = flipEquiv(root1.left , root2.left) && flipEquiv(root1.right ,root2.right);
         return flip || noflip;
     }
 }
