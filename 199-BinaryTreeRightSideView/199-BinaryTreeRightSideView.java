@@ -1,4 +1,4 @@
-// Last updated: 8/22/2025, 3:15:57 PM
+// Last updated: 8/24/2025, 3:29:13 PM
 /**
  * Definition for a binary tree node.
  * public class TreeNode {
@@ -15,23 +15,22 @@
  * }
  */
 class Solution {
-    int max_depth;
-    public List<Integer> rightSideView(TreeNode root) {
-        max_depth = 0;
-        List<Integer> ll = new ArrayList<>();
-        helper(ll,1,root);
-        return ll;
-    }
-
-    public void helper(List<Integer> list , int curr_node , TreeNode root){
+    List<Integer> list;
+    int max_level = 0;
+    public void helper(TreeNode root , int curr_level){
         if(root == null) return;
 
-        if(max_depth < curr_node){
-            max_depth = curr_node;
+        if(max_level < curr_level){
             list.add(root.val);
+            max_level = curr_level;
         }
 
-        helper(list , curr_node+1 , root.right);
-        helper(list , curr_node + 1 , root.left);
+        helper(root.right,curr_level+1);
+        helper(root.left,curr_level+1);
+    }
+    public List<Integer> rightSideView(TreeNode root) {
+        list =new ArrayList<>();
+        helper(root,1);
+        return list;
     }
 }
