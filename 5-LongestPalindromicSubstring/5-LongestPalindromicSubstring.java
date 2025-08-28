@@ -1,33 +1,42 @@
-// Last updated: 8/28/2025, 6:34:29 PM
+// Last updated: 8/28/2025, 7:26:27 PM
 class Solution {
     public String longestPalindrome(String s) {
+        if(s.length() < 2) return s;
         String ans = "";
-        for(int i = 0 ;i < s.length() ; i++){
-            for(int j = s.length()-1 ; j >= 0 && j > i; j--){
-                if(ispossible(s.substring(i,j+1))){
-                    String s1 = s.substring(i,j+1);
-                    if(ans.length() < s1.length()){
-                        ans = s1;
-                    }
+        int left=0;
+        int right = 0;
+        for(int i = 0 ; i< s.length() ; i++){
+            left = i;
+            right = i;
+            while(left >=0 && right < s.length() && s.charAt(left) == s.charAt(right)){
+                if (right - left + 1 > ans.length()) {
+                    ans = s.substring(left, right + 1);
                 }
+                left--;
+                right++;
             }
-        }
-        if(ans.length() == 0  &&  s.length() >= 0){
-            return Character.toString(s.charAt(0));
-        }
-        return ans;
-        
-    }
+            left = i;
+            right = i+1;
 
-    public static boolean ispossible(String s){
-        int lo = 0;
-        int hi = s.length()-1;
-        while(lo < hi){
-            if(s.charAt(lo) != s.charAt(hi)){
-                return false;
+            while(left >=0 && right < s.length() && s.charAt(left) == s.charAt(right)){
+                if (right - left + 1 > ans.length()) {
+                    ans = s.substring(left, right + 1);
+                }
+                left--;
+                right++;
             }
-            lo++;
-            hi--;
+        }
+        
+        return ans;
+    }
+    public boolean isPalindrom(String s){
+        int i = 0 ;
+        int j = s.length()-1;
+
+        while(i <= j){
+            if(s.charAt(i) != s.charAt(j)) return false;
+            i++;
+            j--;
         }
         return true;
     }
