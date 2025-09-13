@@ -1,21 +1,23 @@
-// Last updated: 9/13/2025, 11:15:49 AM
+// Last updated: 9/13/2025, 11:17:12 AM
 class Solution {
     public int maxFreqSum(String s) {
-        int[] fre = new int[26];
-        String str= "aeiou";
-        for(char ch : s.toCharArray()){
-            fre[ch - 'a']++;
+        s=s.toLowerCase();
+        int arr[]=new int[26];
+        for(int i=0;i<s.length();i++){
+            char c = s.charAt(i);
+            arr[c-'a']++;
         }
-
-        int max1 = 0;
-        int max2 = 0;
-        for(int i =0 ;i < 26 ; i++){
-            if(str.contains(Character.toString((char)(i+'a')))){
-                max1 = Math.max(max1,fre[i]);
-            }else{
-                max2= Math.max(max2,fre[i]);
-           }
+        int vmax=0;
+        int cmax=0;
+        for(int i=0;i<arr.length;i++){
+            
+            if((i==0||i==4||i==8||i==14||i==20)&&arr[i]>vmax){
+                vmax=arr[i];
+            }
+            else if((i!=0&&i!=4&&i!=8&&i!=14&&i!=20)&&arr[i]>cmax){
+                cmax=arr[i];
+            }
         }
-        return max1+max2;
+        return vmax+cmax;
     }
 }
