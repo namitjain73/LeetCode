@@ -1,4 +1,4 @@
-// Last updated: 9/15/2025, 2:01:06 AM
+// Last updated: 9/15/2025, 2:01:30 AM
 class Solution {
     public String[] spellchecker(String[] wordlist, String[] queries) {
         String[] ans = new String[queries.length];
@@ -12,10 +12,6 @@ class Solution {
             String str = v(low);
             if(containsvowel(s) && !vowel.containsKey(str)) vowel.put(str,s);
         }
-        System.out.println(set);
-        System.out.println(lower);
-        System.out.println(vowel);
-
         int i = 0;
 
         for(String s : queries){
