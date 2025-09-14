@@ -1,4 +1,4 @@
-// Last updated: 9/15/2025, 2:00:13 AM
+// Last updated: 9/15/2025, 2:01:06 AM
 class Solution {
     public String[] spellchecker(String[] wordlist, String[] queries) {
         String[] ans = new String[queries.length];
@@ -6,9 +6,10 @@ class Solution {
         Map<String,String> lower = new HashMap<>();
         Map<String,String> vowel = new HashMap<>();
         for(String s : wordlist){
+            String low = s.toLowerCase();
             set.add(s);
-            if(!lower.containsKey(s.toLowerCase())) lower.put(s.toLowerCase(),s);
-            String str = v(s.toLowerCase());
+            if(!lower.containsKey(low)) lower.put(low,s);
+            String str = v(low);
             if(containsvowel(s) && !vowel.containsKey(str)) vowel.put(str,s);
         }
         System.out.println(set);
