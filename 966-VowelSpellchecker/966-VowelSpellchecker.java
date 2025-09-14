@@ -1,4 +1,4 @@
-// Last updated: 9/15/2025, 2:01:30 AM
+// Last updated: 9/15/2025, 2:02:31 AM
 class Solution {
     public String[] spellchecker(String[] wordlist, String[] queries) {
         String[] ans = new String[queries.length];
@@ -45,7 +45,8 @@ class Solution {
         return sb.toString();
     }
     public static boolean containsvowel(String s){
-        for(char ch : s.toCharArray()){
+        for(int i = 0; i < s.length() ; i++){
+            char ch = s.charAt(i);
             if(ch == 'a' || ch == 'e' || ch == 'i' || ch == 'o' || ch == 'u'){
                 return true;
             }
