@@ -1,4 +1,4 @@
-// Last updated: 9/15/2025, 3:26:56 AM
+// Last updated: 9/15/2025, 3:30:01 AM
 class Solution {
     class Pair{
         int ele;
@@ -9,15 +9,14 @@ class Solution {
         }
     }
     public int[] topKFrequent(int[] nums, int k) {
-        PriorityQueue<Pair> pq = new PriorityQueue<>((a,b)->{
-            return b.freq-a.freq;
-        });
+        PriorityQueue<Pair> pq = new PriorityQueue<>((a, b) -> a.freq - b.freq);
         Map<Integer,Integer> map = new HashMap<>();
         for(int i : nums){
             map.put(i , map.getOrDefault(i,0)+1);
         }
         for(int x : map.keySet()){
             pq.add(new Pair(x , map.get(x)));
+            if (pq.size() > k) pq.poll();
         }
 
 
