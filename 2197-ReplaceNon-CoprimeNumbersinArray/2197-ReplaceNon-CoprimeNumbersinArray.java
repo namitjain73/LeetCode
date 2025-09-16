@@ -1,4 +1,4 @@
-// Last updated: 9/16/2025, 11:27:00 PM
+// Last updated: 9/16/2025, 11:27:20 PM
 class Solution {
     public List<Integer> replaceNonCoprimes(int[] nums) {
         Stack<Integer>  st = new Stack<>();
@@ -12,7 +12,6 @@ class Solution {
             }
             st.push(curr);
         }
-        System.out.println(st);
         List<Integer> ll = new ArrayList<>();
         for(int i : st){
             ll.add(i);
