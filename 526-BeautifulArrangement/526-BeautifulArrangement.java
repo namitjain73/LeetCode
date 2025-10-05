@@ -1,24 +1,28 @@
-// Last updated: 10/5/2025, 6:16:59 PM
+// Last updated: 10/5/2025, 6:31:56 PM
 class Solution {
-    int ans;
+    boolean isValid[];
+    int count = 0;
+    int n = 0;
     public int countArrangement(int n) {
-        ans =  0;
-        List<Integer> list = new ArrayList<>();
-        solve(n ,list);
-        return ans;
+        this.n = n;
+        isValid = new boolean[n+1];
+        if(n==1)return 1;
+        if(n==2)return 2;
+        helper(n, isValid);
+        return count;
     }
-    public void solve(int n , List<Integer> list){
-        if(list.size() == n){
-            ans++;
+    public void helper(int start, boolean[] isValid){
+        if(start<1){
+            count++;
             return;
         }
 
-        for(int i = 1 ; i <= n ; i++){
-            if(list.contains(i)) continue;
-            if((list.size()+1)%i == 0 || i%(list.size()+1)==0){
-                list.add(i);
-                solve(n,list);
-                list.remove(list.size()-1);
+        for(int i=n;i>=1;i--){
+            if(isValid[i])continue;
+            if(start%i==0 || i%start==0){
+                isValid[i]=true;
+                helper(start-1, isValid);
+                isValid[i]=false;
             }
         }
     }
